@@ -1,4 +1,4 @@
 #! /bin/bash
-sudo rmmod test_rbtree
-sudo insmod test_rbtree.ko
+sudo rmmod rbtree
+sudo insmod rbtree.ko
 dmesg
