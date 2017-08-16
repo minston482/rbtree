@@ -1,6 +1,3 @@
-
-//#include "hello-trace.h"
-
 #ifndef _SIMUL_RBTREE_H
 #define _SIMUL_RBTREE_H
 

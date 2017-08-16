@@ -25,6 +25,23 @@ TRACE_EVENT(me_simul,
 	TP_printk("time=%lu count=%lu", __entry->time, __entry->count)
 );
 
+TRACE_EVENT(hello_echo,
+
+    TP_PROTO(unsigned long count),
+
+	TP_ARGS(count),
+
+	TP_STRUCT__entry(
+        __field(unsigned long, count)
+    ),
+	
+	TP_fast_assign(
+        __entry->count = count;
+    ),
+    
+	TP_printk("hello echo %lu", __entry->count)
+);
+
 
 #endif
 #undef TRACE_INCLUDE_PATH

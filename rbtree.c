@@ -7,7 +7,7 @@
 #define CREATE_TRACE_POINTS
 #include "hello-trace.h"
 #include "rbtree.h"
-//#if 0
+
 simul_rb_node *parent_of (simul_rb_node *node) {
 	return node->rb_parent;
 }
@@ -41,6 +41,7 @@ void init_rb_root (simul_rb_root *root) {
 	root->nil_node->rb_parent = root->nil_node;
 	root->nil_node->rb_right = root->nil_node;
 	root->nil_node->rb_left = root->nil_node;
+	set_rb_black(root->root_node);
 	root->root_node->rb_key = SIMUL_RB_NIL;
 	root->root_node->rb_parent = root->nil_node;
 	root->root_node->rb_left = root->nil_node;
@@ -372,7 +373,6 @@ simul_rb_node *simul_rb_search (simul_rb_root *T, int64_t find_key) {
 	
 	return search_node;
 }
-//#endif
 void simul_rb_pre_order (simul_rb_root *T, simul_rb_node *node) {
 	printk("key : %lld color : %u\n", node->rb_key, node->rb_color);
 	if (node->rb_left != T->nil_node)
@@ -383,12 +383,12 @@ void simul_rb_pre_order (simul_rb_root *T, simul_rb_node *node) {
 
 static int hello_init(void)
 {
-	//  trace_hello_echo(1);
-	//printk("Hi");
 	int64_t i = 0;
 	uint32_t retval = 0;
 	simul_rb_root *root = simul_rb_alloc_root();
 	simul_rb_node *node = NULL;
+	
+	trace_hello_echo(1);
 
 	init_rb_root (root);
 	simul_rb_insert (root, 5);
@@ -453,3 +453,4 @@ module_exit(hello_exit);
 //MODULE_AUTHOR("Steven Rostedt");
 //MODULE_DESCRIPTION("silly-module");
 MODULE_LICENSE("GPL");
+
